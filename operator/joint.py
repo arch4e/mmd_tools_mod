@@ -32,9 +32,11 @@ class MMDMOD_OT_joint_add(bpy.types.Operator):
 
             # rename joint
             if self.JOINT_DIRECTION == 'VERTICAL':
-                _joint.name = context.active_object.mmd_joint.name_j = '縦_' + _joint.name
+                context.active_object.mmd_joint.name_j =  _joint.name + '_V'
+                _joint.name = 'ZZZ_' + context.active_object.mmd_joint.name_j # 'ZZZ_' is order prefix
             else:
-                _joint.name = context.active_object.mmd_joint.name_j = '横_' + _joint.name
+                context.active_object.mmd_joint.name_j =  _joint.name + '_H'
+                _joint.name = 'ZZZ_' + context.active_object.mmd_joint.name_j # 'ZZZ_' is order prefix
 
         return {'FINISHED'}
 
