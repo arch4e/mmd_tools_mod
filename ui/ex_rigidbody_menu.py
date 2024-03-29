@@ -38,6 +38,9 @@ class MMDMOD_JointUtility(BasePanel, bpy.types.Panel):
         tb1.enabled = active_obj.mmd_type == 'JOINT'
         tb1.operator('mmd_tools.object_move', text='', icon='TRIA_UP').type = 'UP'
         tb1.operator('mmd_tools.object_move', text='', icon='TRIA_DOWN').type = 'DOWN'
+        tb.separator()
+        tb1 = tb.column(align=True)
+        tb1.operator('mmd_tools_mod.joint_sort', text='', icon='CHECKMARK')
 
         col = c.column()
         row = col.row()
