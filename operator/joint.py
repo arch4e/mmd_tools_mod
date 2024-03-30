@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 import bpy
 import re
-from natsort import natsorted
 
 from mmd_tools_mod.mmd_tools.bpyutils import SceneOp
 import mmd_tools_mod.mmd_tools.core.model as mmd_model
+
+SORT_MODULE = None
+
+try:
+    from natsort import natsorted
+    SORT_MODULE = 'natsort'
+except ModuleNotFoundError as e:
+    print('')
+    print(f'mmd_tools_error: {e}')
 
 
 class MMDMOD_OT_joint_add(bpy.types.Operator):
@@ -54,7 +62,13 @@ class MMDMOD_OT_joint_sort(bpy.types.Operator):
             lambda x: hasattr(x, 'mmd_type') and x.mmd_type == 'JOINT',
             SceneOp(context).id_scene.objects
         ))
-        sorted_joint_name_list = natsorted(list(map(lambda x: x.mmd_joint.name_j, joint_objects)))
+
+        # sort
+        sorted_joint_name_list = list(map(lambda x: x.mmd_joint.name_j, joint_objects))
+        if SORT_MODULE == 'natsort':
+            sorted_joint_name_list = natsorted(sorted_joint_name_list)
+        else:
+            sorted_joint_name_list = sorted(sorted_joint_name_list)
 
         # create joint dict
         joint_dict = {}
