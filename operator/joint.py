@@ -75,3 +75,29 @@ class MMDMOD_OT_joint_sort(bpy.types.Operator):
 
         return {'FINISHED'}
 
+
+class MMDMOD_OT_joint_unique(bpy.types.Operator):
+    bl_idname = 'mmd_tools_mod.joint_unique'
+    bl_label  = 'rename duplicate joints to unique names'
+
+    def execute(self, context):
+        bpy.ops.ed.undo_push(message='mmd_tools_mod: before joint rename')
+
+        joint_objects = list(filter(
+            lambda x: hasattr(x, 'mmd_type') and x.mmd_type == 'JOINT',
+            SceneOp(context).id_scene.objects
+        ))
+
+        for joint in joint_objects:
+            prefix = re.match(r'^([0-9]|[A-Z]){3}_', joint.name)
+
+            joint.name = joint.mmd_joint.name_j
+            joint.mmd_joint.name_j = joint.name # write back name (.001, .002 , ...)
+
+            if prefix is not None:
+                joint.name = prefix.group() + joint.name
+
+        bpy.ops.ed.undo_push(message='mmd_tools_mod: before joint rename')
+
+        return {'FINISHED'}
+

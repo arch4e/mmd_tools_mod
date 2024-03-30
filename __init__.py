@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import bpy
 
-from .operator.joint import MMDMOD_OT_joint_add, MMDMOD_OT_joint_sort
+from .operator.joint import MMDMOD_OT_joint_add, MMDMOD_OT_joint_sort, MMDMOD_OT_joint_unique
 from .ui.ex_rigidbody_menu import MMDMOD_JointUtility
 
 
@@ -20,6 +20,7 @@ bl_info = {
 classes = [
     MMDMOD_OT_joint_add,
     MMDMOD_OT_joint_sort,
+    MMDMOD_OT_joint_unique,
     MMDMOD_JointUtility,
 ]
 
