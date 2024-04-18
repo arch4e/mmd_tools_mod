@@ -9,7 +9,7 @@ bl_info = {
     'name'    : 'mmd_tools_mod',
     'category': '3D View',
     'location': '',
-    'version' : (1,0,0),
+    'version' : (4,0,0),
     'blender' : (3,0,0),
     'author'  : 'arch4e'
 }

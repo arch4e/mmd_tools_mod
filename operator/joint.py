@@ -102,11 +102,18 @@ class MMDMOD_OT_joint_unique(bpy.types.Operator):
             SceneOp(context).id_scene.objects
         ))
 
+        joint_count = {}
         for joint in joint_objects:
             prefix = re.match(r'^([0-9]|[A-Z]){3}_', joint.name)
 
-            joint.name = joint.mmd_joint.name_j
-            joint.mmd_joint.name_j = joint.name # write back name (.001, .002 , ...)
+            if joint.mmd_joint.name_j in joint_count.keys():
+                joint.name = joint.mmd_joint.name_j + '.{:0=3}'.format(joint_count[joint.mmd_joint.name_j])
+                joint_count[joint.mmd_joint.name_j] += 1
+            else:
+                joint.name = joint.mmd_joint.name_j
+                joint_count[joint.mmd_joint.name_j] = 1
+
+            joint.mmd_joint.name_j = joint.name
 
             if prefix is not None:
                 joint.name = prefix.group() + joint.name
