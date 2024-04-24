@@ -32,8 +32,8 @@ class MMDMOD_OT_joint_add(bpy.types.Operator):
 
             # select rigid body pair
             bpy.ops.object.select_all(action='DESELECT')
-            selected_objects[i - 1].select = True
-            selected_objects[i].select = True
+            selected_objects[i - 1].select_set(True)
+            selected_objects[i].select_set(True)
 
             # create joint
             bpy.ops.mmd_tools.joint_add()
