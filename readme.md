@@ -13,6 +13,8 @@
 
 If you wish to utilize natural sorting, you'll need to install the [natsort](https://pypi.org/project/natsort/) module.
 
+#### Method 1: Adding via CLI
+
 reference: [Directory Layout](https://docs.blender.org/manual/en/latest/advanced/blender_directory_layout.html)
 ```sh
 # Windows
@@ -24,6 +26,10 @@ reference: [Directory Layout](https://docs.blender.org/manual/en/latest/advanced
 # --- reference ---
 # https://docs.blender.org/manual/en/latest/advanced/blender_directory_layout.html
 ```
+
+#### Method 2: Using the Python interpreter
+
+![module_install](./images/blender_pip.jpg)
 
 
 ## Code Format
